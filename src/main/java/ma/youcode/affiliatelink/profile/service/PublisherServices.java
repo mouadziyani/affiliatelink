@@ -1,3 +1,4 @@
+package ma.youcode.affiliatelink.profile.service;
 
 import lombok.AllArgsConstructor;
 import ma.youcode.affiliatelink.profile.dto.request.PublisherReqDto;
@@ -44,4 +45,24 @@ public class PublisherServices {
 
     }
 
+    public List<PublisherResDto> getAllPublisher(){
+        List<Publisher> publisher = publisherRepository.findAll();
+
+        List<PublisherResDto> publishers = publisher.stream()
+                .map(p->PublisherResDto.builder()
+                        .id(p.getId())
+                        .email(p.getEmail())
+                        .firstName(p.getFirstName())
+                        .lastName(p.getLastName())
+                        .niche(p.getNiche())
+                        .bio(p.getBio())
+                        .country(p.getCountry())
+                        .statue(p.getStatus())
+                        .createdAt(p.getCreatedAt())
+                        .build()
+
+                ).toList();
+
+        return publishers;
+    }
 }
