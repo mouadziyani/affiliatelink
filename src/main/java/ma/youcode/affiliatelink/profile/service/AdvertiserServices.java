@@ -1,3 +1,4 @@
+package ma.youcode.affiliatelink.profile.service;
 
 import lombok.*;
 import ma.youcode.affiliatelink.profile.dto.request.AdvertiserReqDto;
@@ -37,4 +38,21 @@ public class AdvertiserServices {
                 .website(create.getWebsite())
                 .build();
     }
+
+    public List<AdvertiserResDto> getAllAdvertisers(){
+        List<Advertiser> advertisers = advertiserRepository.findAll();
+
+        return advertisers.stream()
+                .map(a-> AdvertiserResDto.builder()
+                        .id(a.getId())
+                        .email(a.getEmail())
+                        .statue(a.getStatus())
+                        .createdAt(a.getCreatedAt())
+                        .companyName(a.getCompanyName())
+                        .sector(a.getSector())
+                        .website(a.getWebsite())
+                        .build()
+                ).toList();
+    }
+
 }
