@@ -65,4 +65,21 @@ public class PublisherServices {
 
         return publishers;
     }
+
+    public PublisherResDto getPublisherById(Long id){
+        Publisher publisher = publisherRepository.findById(id).orElseThrow(() -> new RuntimeException("id nout found"));
+
+        return PublisherResDto.builder()
+                .id(publisher.getId())
+                .email(publisher.getEmail())
+                .firstName(publisher.getFirstName())
+                .lastName(publisher.getLastName())
+                .niche(publisher.getNiche())
+                .bio(publisher.getBio())
+                .country(publisher.getCountry())
+                .statue(publisher.getStatus())
+                .createdAt(publisher.getCreatedAt())
+                .build();
+
+    }
 }
