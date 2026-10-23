@@ -55,4 +55,16 @@ public class AdvertiserServices {
                 ).toList();
     }
 
+    public AdvertiserResDto getAdvertiserById(Long id){
+        Advertiser advertiser = advertiserRepository.findById(id).orElseThrow(() -> new RuntimeException("id nout found"));
+        return AdvertiserResDto.builder()
+                .id(advertiser.getId())
+                .email(advertiser.getEmail())
+                .statue(advertiser.getStatus())
+                .createdAt(advertiser.getCreatedAt())
+                .companyName(advertiser.getCompanyName())
+                .sector(advertiser.getSector())
+                .website(advertiser.getWebsite())
+                .build();
+    }
 }
