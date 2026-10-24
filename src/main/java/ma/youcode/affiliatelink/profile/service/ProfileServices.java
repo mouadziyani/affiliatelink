@@ -34,4 +34,16 @@ public class ProfileServices {
                 .createdAt(profile.getCreatedAt()).
                 build();
     }
+
+    public List<ProfileResDto> getAll() {
+        return profileRepository.findAll()
+                .stream()
+                .map(profile -> ProfileResDto.builder()
+                        .id(profile.getId())
+                        .email(profile.getEmail())
+                        .statue(profile.getStatus())
+                        .createdAt(profile.getCreatedAt())
+                        .build())
+                .toList();
+    }
 }
