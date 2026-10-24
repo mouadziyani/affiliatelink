@@ -9,10 +9,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/admin//profile")
+@RequestMapping("/api/admin/profile")
 @AllArgsConstructor
 public class AdminProfileController {
     private final ProfileServices profileServices;
+
+    @GetMapping
+    public ResponseEntity<?> getAllProfiles(){
+        return ResponseEntity.ok(profileServices.getAll());
+    }
 
     @PatchMapping("/{id}/status")
     public ResponseEntity<?> updateStatues(@PathVariable Long id , @Valid @RequestBody ProfileReqDto dto){
