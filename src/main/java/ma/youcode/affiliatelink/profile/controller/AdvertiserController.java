@@ -4,7 +4,6 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import ma.youcode.affiliatelink.profile.dto.request.AdvertiserReqDto;
 import ma.youcode.affiliatelink.profile.dto.response.AdvertiserResDto;
-import ma.youcode.affiliatelink.profile.entity.Advertiser;
 import ma.youcode.affiliatelink.profile.service.AdvertiserServices;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
