@@ -22,6 +22,7 @@ public class PublisherServices {
         }
 
         Publisher publisher = Publisher.builder()
+                .email(dto.email())
                 .firstName(dto.firstName())
                 .lastName(dto.lastName())
                 .niche(dto.niche())

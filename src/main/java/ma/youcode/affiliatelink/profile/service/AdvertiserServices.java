@@ -23,7 +23,7 @@ public class AdvertiserServices {
                 .email(dto.email())
                 .companyName(dto.companyName())
                 .sector(dto.sector())
-                .website(dto.website().name())
+                .website(dto.website())
                 .build();
 
         Advertiser create = advertiserRepository.save(advertiser);

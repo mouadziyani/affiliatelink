@@ -9,7 +9,7 @@ import ma.youcode.affiliatelink.profile.enums.PublisherNiche;
 public record PublisherReqDto (
         @NotBlank(message = "Email is required")
         @Email(message = "Email must be valid ")
-        @Size(max = 255 , message = "Email must not exceed 100 characters")
+        @Size(max = 255, message = "Email must not exceed 255 characters")
         String email,
 
         @NotBlank(message = "First name is required")
@@ -21,11 +21,10 @@ public record PublisherReqDto (
         String lastName,
 
         @NotNull(message = "Niche is required")
-        @Size(max = 100, message = "Niche must not exceed 100 characters")
         PublisherNiche niche,
 
-        @NotBlank(message = "Message is required")
-        @Size(max = 100, message = "Message must not exceed 100 characters")
+        @NotBlank(message = "Bio is required")
+        @Size(max = 255, message = "Bio must not exceed 255 characters")
         String bio ,
 
         @NotBlank(message = "Country is required")
