@@ -3,15 +3,11 @@ package ma.youcode.affiliatelink.profile.service;
 import lombok.AllArgsConstructor;
 import ma.youcode.affiliatelink.profile.dto.request.ProfileReqDto;
 import ma.youcode.affiliatelink.profile.dto.response.ProfileResDto;
-import ma.youcode.affiliatelink.profile.dto.response.PublisherResDto;
 import ma.youcode.affiliatelink.profile.entity.Profile;
-import ma.youcode.affiliatelink.profile.entity.Publisher;
 import ma.youcode.affiliatelink.profile.enums.ProfileStatue;
 import ma.youcode.affiliatelink.profile.repository.ProfileRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -24,7 +20,7 @@ public class ProfileServices {
 
         ProfileStatue newStatus = dto.statue();
 
-        profile.setStatus(newStatus);
+        profile.changeStatus(newStatus);
         profileRepository.save(profile);
 
         return ProfileResDto.builder()

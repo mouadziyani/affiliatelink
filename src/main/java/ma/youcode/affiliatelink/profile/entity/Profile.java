@@ -9,7 +9,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.Instant;
 
 @Getter
-@Setter
 @SuperBuilder
 @Entity
 @AllArgsConstructor
@@ -26,9 +25,22 @@ public abstract class Profile {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
+    @Builder.Default
     private ProfileStatue status = ProfileStatue.PENDING;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
+
+    public void changeStatus(ProfileStatue newStatus) {
+        boolean allowed = (status == ProfileStatue.PENDING && newStatus == ProfileStatue.ACTIVE)
+                || (status == ProfileStatue.ACTIVE && newStatus == ProfileStatue.SUSPENDED)
+                || (status == ProfileStatue.SUSPENDED && newStatus == ProfileStatue.ACTIVE);
+
+        if (!allowed) {
+            throw new IllegalStateException(
+                    "Cannot change profile status from " + status + " to " + newStatus);
+        }
+        this.status = newStatus;
+    }
 }

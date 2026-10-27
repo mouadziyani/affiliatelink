@@ -1,23 +1,25 @@
 package ma.youcode.affiliatelink.profile.dto.request;
 
 import jakarta.validation.constraints.*;
-import ma.youcode.affiliatelink.profile.enums.PublisherNiche;
+import org.hibernate.validator.constraints.URL;
 
 public record AdvertiserReqDto(
         @NotBlank(message = "Email is required")
         @Email(message = "Email must be valid ")
-        @Size(max = 255 , message = "Email must not exceed 100 characters")
+        @Size(max = 255, message = "Email must not exceed 255 characters")
         String email,
 
         @NotBlank(message = "Company name is required")
-        @Size(min = 2, max = 100, message = "Company Name name must not exceed 100 characters")
+        @Size(min = 2, max = 255, message = "Company name must be between 2 and 255 characters")
         String companyName,
 
-        @NotBlank(message = "Last name is required")
-        @Size(max = 100, message = "sector must not exceed 100 characters")
+        @NotBlank(message = "Sector is required")
+        @Size(max = 255, message = "Sector must not exceed 255 characters")
         String sector,
 
-        @Size(max = 100, message = "website must not exceed 100 characters")
-        PublisherNiche website
+        @NotBlank(message = "Website is required")
+        @URL(message = "Website must be a valid URL")
+        @Size(max = 255, message = "Website must not exceed 255 characters")
+        String website
 ) {
 }
