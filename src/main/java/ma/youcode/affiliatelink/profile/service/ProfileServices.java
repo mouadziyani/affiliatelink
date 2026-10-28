@@ -8,6 +8,8 @@ import ma.youcode.affiliatelink.profile.enums.ProfileStatue;
 import ma.youcode.affiliatelink.profile.repository.ProfileRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 @AllArgsConstructor
