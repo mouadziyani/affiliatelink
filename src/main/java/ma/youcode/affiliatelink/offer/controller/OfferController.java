@@ -21,4 +21,9 @@ public class OfferController {
         return ResponseEntity.status(HttpStatus.CREATED).body(offer);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<OfferResDto> getOfferById(@PathVariable Long id) {
+        OfferResDto offer = offerServices.getOfferById(id);
+        return ResponseEntity.ok(offer);
+    }
 }
