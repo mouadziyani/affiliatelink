@@ -12,7 +12,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @Entity
 @Table(name = "offers")
-public abstract class Offer {
+public class Offer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
