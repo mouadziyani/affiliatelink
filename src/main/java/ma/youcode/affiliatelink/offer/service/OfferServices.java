@@ -47,4 +47,14 @@ public class OfferServices {
         return toResDto(created);
     }
 
+    public OfferResDto getOfferById(Long id) {
+
+        Offer offer = offerRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Offer with id " + id + " not found"
+                ));
+
+        return toResDto(offer);
+    }
+
 }
