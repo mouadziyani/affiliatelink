@@ -65,4 +65,16 @@ public class OfferServices {
                 .toList();
     }
 
+    private OfferResDto toResDto(Offer offer) {
+
+        return OfferResDto.builder()
+                .id(offer.getId())
+                .advertiserId(offer.getAdvertiserId())
+                .title(offer.getTitle())
+                .description(offer.getDescription())
+                .landingUrl(offer.getLandingUrl())
+                .offerNiche(offer.getOfferNiche())
+                .createdAt(offer.getCreatedAt())
+                .build();
+    }
 }
