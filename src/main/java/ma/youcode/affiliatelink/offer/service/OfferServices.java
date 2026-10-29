@@ -57,4 +57,12 @@ public class OfferServices {
         return toResDto(offer);
     }
 
+    public List<OfferResDto> getAll() {
+
+        return offerRepository.findAll()
+                .stream()
+                .map(offer -> toResDto(offer))
+                .toList();
+    }
+
 }
