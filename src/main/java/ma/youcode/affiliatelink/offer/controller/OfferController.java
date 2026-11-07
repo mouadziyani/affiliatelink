@@ -26,4 +26,13 @@ public class OfferController {
         OfferResDto offer = offerServices.getOfferById(id);
         return ResponseEntity.ok(offer);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<OfferResDto> updateOffer(
+            @PathVariable Long id,
+            @Valid @RequestBody OfferReqDto dto
+    ) {
+        OfferResDto offer = offerServices.updateOffer(id, dto);
+        return ResponseEntity.ok(offer);
+    }
 }
