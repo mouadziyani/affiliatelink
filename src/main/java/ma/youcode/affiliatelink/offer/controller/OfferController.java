@@ -21,6 +21,30 @@ import ma.youcode.affiliatelink.offer.enums.OfferNiche;
 public class OfferController {
     private final OfferServices offerServices;
 
+    @GetMapping
+    public Page<OfferResDto> search(
+            @RequestParam(required = false) OfferNiche niche,
+            @RequestParam(required = false) Long advertiserId,
+            @RequestParam(required = false) String tag,
+            @RequestParam(required = false) String keyword,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "createdAt,desc") String sort) {
+        if (page < 0 || size < 1 || size > 100) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid page or size");
+        String[] sortParts = sort.split(",");
+        String property = sortParts[0];
+        if (!java.util.Set.of("createdAt", "title", "advertiserId", "offerNiche").contains(property))
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid sort property");
+        if (sortParts.length > 2 || (sortParts.length == 2
+                && !sortParts[1].equalsIgnoreCase("asc") && !sortParts[1].equalsIgnoreCase("desc")))
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid sort direction");
+        Sort.Direction direction = sortParts.length > 1 && sortParts[1].equalsIgnoreCase("desc")
+                ? Sort.Direction.DESC : Sort.Direction.ASC;
+        Sort sorting = Sort.by(direction, property);
+        Pageable pageable = PageRequest.of(page, size, sorting);
+        return offerServices.search(niche, advertiserId, tag, keyword, pageable);
+    }
+
     @PostMapping
     public ResponseEntity<OfferResDto> createOffer(@Valid @RequestBody OfferReqDto dto) {
         OfferResDto offer = offerServices.createOffer(dto);

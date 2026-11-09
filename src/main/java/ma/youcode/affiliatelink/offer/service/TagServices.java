@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Locale;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +17,7 @@ public class TagServices {
 
     @Transactional
     public TagResDto create(TagReqDto dto) {
-        String name = dto.name().trim().toLowerCase(Locale.ROOT);
+        String name = dto.name().trim().toLowerCase();
         Tag tag = repository.findByName(name).orElseGet(() -> repository.save(new Tag(name)));
         return toDto(tag);
     }

@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Locale;
 
 @Service
 @RequiredArgsConstructor
@@ -41,7 +40,7 @@ public class OfferServices {
 
     @Transactional(readOnly = true)
     public Page<OfferResDto> search(OfferNiche niche, Long advertiserId, String tag, String keyword, Pageable pageable) {
-        String normalizedTag = tag == null || tag.isBlank() ? null : tag.trim().toLowerCase(Locale.ROOT);
+        String normalizedTag = tag == null || tag.isBlank() ? null : tag.trim().toLowerCase();
         String normalizedKeyword = keyword == null || keyword.isBlank() ? null : keyword.trim();
         return offerRepository.search(niche, advertiserId, normalizedTag, normalizedKeyword, pageable).map(this::toResDto);
     }
@@ -77,7 +76,7 @@ public class OfferServices {
         offer.getTags().clear();
         if (rawTags == null) return;
         for (String rawTag : new LinkedHashSet<>(rawTags)) {
-            String name = rawTag.trim().toLowerCase(Locale.ROOT);
+            String name = rawTag.trim().toLowerCase();
             Tag tag = tagRepository.findByName(name).orElseGet(() -> tagRepository.save(new Tag(name)));
             offer.getTags().add(tag);
         }
