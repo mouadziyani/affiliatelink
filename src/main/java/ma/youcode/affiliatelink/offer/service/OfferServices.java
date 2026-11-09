@@ -65,6 +65,26 @@ public class OfferServices {
                 .toList();
     }
 
+    public OfferResDto updateOffer(Long id , OfferReqDto dto){
+        Offer offer = offerRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Offer with id " + id + " not found"));
+        if (!advertiserApi.existsById(dto.advertiserId())){
+            throw new ResourceNotFoundException(
+                    "Advertiser not found"
+            );
+        }
+
+        offer.setAdvertiserId(dto.advertiserId());
+        offer.setTitle(dto.title());
+        offer.setDescription(dto.description());
+        offer.setLandingUrl(dto.landingUrl());
+        offer.setOfferNiche(dto.offerNiche());
+
+        Offer update = offerRepository.save(offer);
+
+        return toResDto(update);
+
+    }
+
     private OfferResDto toResDto(Offer offer) {
 
         return OfferResDto.builder()
