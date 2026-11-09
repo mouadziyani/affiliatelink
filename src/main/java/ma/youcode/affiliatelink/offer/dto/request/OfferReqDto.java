@@ -1,29 +1,18 @@
-
 package ma.youcode.affiliatelink.offer.dto.request;
 
-import jakarta.validation.constraints.*;
-import lombok.Builder;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import ma.youcode.affiliatelink.offer.enums.OfferNiche;
 
-@Builder
+import java.util.List;
+
 public record OfferReqDto(
-        @NotNull(message = "Advertiser ID is required")
-        @Positive(message = "Advertiser ID must be positive")
-        Long advertiserId,
-
-        @NotBlank(message = "Title is required")
-        @Size(max = 100, message = "Title must not exceed 100 characters")
-        String title,
-
-        @NotBlank(message = "Description is required")
-        @Size(max = 2000, message = "Description must not exceed 2000 characters")
-        String description,
-
-        @NotBlank(message = "Landing URL is required")
-        @Size(max = 2048, message = "Landing URL must not exceed 2048 characters")
-        String landingUrl,
-
-        @NotNull(message = "Offer niche is required")
-        OfferNiche offerNiche
-) {
-}
+        @NotNull @Positive Long advertiserId,
+        @NotBlank @Size(max = 100) String title,
+        @NotBlank @Size(max = 2000) String description,
+        @NotBlank @Size(max = 2048) String landingUrl,
+        @NotNull OfferNiche offerNiche,
+        List<@NotBlank @Size(max = 80) String> tags
+) {}

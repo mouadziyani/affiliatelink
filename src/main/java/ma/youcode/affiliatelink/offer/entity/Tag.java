@@ -19,4 +19,6 @@ public class Tag {
     @ManyToMany(mappedBy = "tags")
     private Set<Offer> offers = new LinkedHashSet<>();
 
+    public Tag(String name) { this.name = name; }
+
 }
