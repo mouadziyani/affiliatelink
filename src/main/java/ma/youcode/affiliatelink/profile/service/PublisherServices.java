@@ -5,6 +5,8 @@ import ma.youcode.affiliatelink.profile.dto.request.PublisherReqDto;
 import ma.youcode.affiliatelink.profile.dto.response.PublisherResDto;
 import ma.youcode.affiliatelink.profile.entity.Publisher;
 import ma.youcode.affiliatelink.profile.repository.PublisherRepository;
+import ma.youcode.affiliatelink.shared.exception.ConflictException;
+import ma.youcode.affiliatelink.shared.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +20,7 @@ public class PublisherServices {
     public PublisherResDto createPub(PublisherReqDto dto){
 
         if (publisherRepository.existsByEmail(dto.email())){
-            throw new RuntimeException("email already exist");
+            throw new ConflictException("Email is already in use");
         }
 
         Publisher publisher = Publisher.builder()
@@ -68,7 +70,8 @@ public class PublisherServices {
     }
 
     public PublisherResDto getPublisherById(Long id){
-        Publisher publisher = publisherRepository.findById(id).orElseThrow(() -> new RuntimeException("id nout found"));
+        Publisher publisher = publisherRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Publisher not found"));
 
         return PublisherResDto.builder()
                 .id(publisher.getId())

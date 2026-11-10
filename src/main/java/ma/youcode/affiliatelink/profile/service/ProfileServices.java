@@ -6,6 +6,7 @@ import ma.youcode.affiliatelink.profile.dto.response.ProfileResDto;
 import ma.youcode.affiliatelink.profile.entity.Profile;
 import ma.youcode.affiliatelink.profile.enums.ProfileStatue;
 import ma.youcode.affiliatelink.profile.repository.ProfileRepository;
+import ma.youcode.affiliatelink.shared.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +18,8 @@ public class ProfileServices {
     private final ProfileRepository profileRepository;
 
     public ProfileResDto update(Long id, ProfileReqDto dto) {
-        Profile profile = profileRepository.findById(id).orElseThrow(() -> new RuntimeException("id nout found"));
+        Profile profile = profileRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Profile not found"));
 
 
         ProfileStatue newStatus = dto.statue();

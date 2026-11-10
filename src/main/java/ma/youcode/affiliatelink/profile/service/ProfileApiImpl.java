@@ -1,6 +1,5 @@
 package ma.youcode.affiliatelink.profile.service;
 
-import jakarta.transaction.Transactional;
 import ma.youcode.affiliatelink.profile.ProfileApi;
 import ma.youcode.affiliatelink.profile.entity.Advertiser;
 import ma.youcode.affiliatelink.profile.enums.ProfileStatue;

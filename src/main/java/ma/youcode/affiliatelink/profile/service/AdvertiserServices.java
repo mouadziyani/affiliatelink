@@ -5,6 +5,8 @@ import ma.youcode.affiliatelink.profile.dto.request.AdvertiserReqDto;
 import ma.youcode.affiliatelink.profile.dto.response.AdvertiserResDto;
 import ma.youcode.affiliatelink.profile.entity.Advertiser;
 import ma.youcode.affiliatelink.profile.repository.AdvertiserRepository;
+import ma.youcode.affiliatelink.shared.exception.ConflictException;
+import ma.youcode.affiliatelink.shared.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +18,7 @@ public class AdvertiserServices {
 
     public AdvertiserResDto createAdvertiser(AdvertiserReqDto dto){
         if (advertiserRepository.existsByEmail(dto.email())){
-                throw new RuntimeException("email exist");
+                throw new ConflictException("Email is already in use");
         }
 
         Advertiser advertiser = Advertiser.builder()
@@ -56,7 +58,8 @@ public class AdvertiserServices {
     }
 
     public AdvertiserResDto getAdvertiserById(Long id){
-        Advertiser advertiser = advertiserRepository.findById(id).orElseThrow(() -> new RuntimeException("id nout found"));
+        Advertiser advertiser = advertiserRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Advertiser not found"));
         return AdvertiserResDto.builder()
                 .id(advertiser.getId())
                 .email(advertiser.getEmail())
