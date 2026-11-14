@@ -169,3 +169,19 @@ Further modules will be implemented progressively.
 
 Developed by **Mouad Ziyani**  
 Sprint 3 — Brief 2
+
+---
+
+## 👤 Auteur
+
+**Mouad Ziyani** — Développeur Full-Stack (PHP/Laravel · Java/Spring · React)
+
+[![Portfolio](https://img.shields.io/badge/Portfolio-mouadziyani.com-d92632?style=flat-square)](https://mouadziyani.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Mouad%20Ziyani-0A66C2?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/mouad-ziyani-956484339)
+[![GitHub](https://img.shields.io/badge/GitHub-mouadziyani-181717?style=flat-square&logo=github)](https://github.com/mouadziyani)
+
+## 📄 Licence
+
+© 2025-2026 Mouad Ziyani — **Tous droits réservés.**
+
+Ce projet est publié uniquement à titre de démonstration (portfolio). Il est **interdit** de copier, cloner, modifier, redistribuer ou réutiliser ce code, en tout ou en partie, sans l'autorisation écrite préalable de l'auteur. Voir le fichier [LICENSE](LICENSE).
